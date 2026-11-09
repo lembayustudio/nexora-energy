@@ -1,7 +1,25 @@
 import { chromium } from 'playwright';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 
 const base='http://127.0.0.1:4173';
+// WordPress editors may rename or remove demo entries. Discover generated detail URLs
+// rather than making QA dependent on the two initial sample slugs.
+async function firstBuiltDetail(type) {
+  const dir = join('dist', type);
+  try {
+    const children = await readdir(dir, { withFileTypes: true });
+    const first = children.find(child =>
+      child.isDirectory() && existsSync(join(dir, child.name, 'index.html'))
+    );
+    return first ? `/${type}/${encodeURIComponent(first.name)}/` : undefined;
+  } catch {
+    return undefined;
+  }
+}
+const projectDetail=await firstBuiltDetail('projects');
+const eventDetail=await firstBuiltDetail('events');
 const routes=[
   {path:'/',label:'home',width:320,height:760},
   {path:'/',label:'home',width:390,height:844},
@@ -12,8 +30,8 @@ const routes=[
   {path:'/projects/',label:'projects',width:1440,height:900},
   {path:'/events/',label:'events',width:390,height:844},
   {path:'/events/',label:'events',width:1440,height:900},
-  {path:'/projects/offshore-platform-maintenance-inspection/',label:'project-detail',width:390,height:844},
-  {path:'/events/asia-offshore-energy-conference-2026/',label:'event-detail',width:390,height:844}
+  ...(projectDetail ? [{path:projectDetail,label:'project-detail',width:390,height:844}] : []),
+  ...(eventDetail ? [{path:eventDetail,label:'event-detail',width:390,height:844}] : [])
 ];
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 await mkdir('screenshots',{recursive:true});
