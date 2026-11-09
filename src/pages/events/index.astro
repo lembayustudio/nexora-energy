@@ -1,0 +1,6 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getEntries,clean} from '../../lib/content';
+const events=await getEntries('events');
+---
+<Base title="Insights & Events | NEXORA Energy"><section class="page-hero"><div class="container"><span class="eyebrow accent">LATEST UPDATES</span><h1>Ideas, updates<br/>& what's next.</h1><p>Events and perspectives from across our evolving world.</p></div></section><section class="section section-white"><div class="container">{events.length?<div class="project-grid">{events.map(e=><a class="project-card" href={`/events/${e.slug}/`}><div class="project-info"><span>{new Date(e.date).toLocaleDateString('en-MY',{day:'numeric',month:'long',year:'numeric'})}</span><h3>{clean(e.title.rendered)}</h3><p>{clean(e.excerpt?.rendered||'Read more about this update.')}</p></div></a>)}</div>:<div class="empty-state">Events will appear here when published in WordPress and the site is rebuilt.</div>}</div></section></Base>

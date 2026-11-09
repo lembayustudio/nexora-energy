@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getEntries,clean,imageOf} from '../../lib/content';
+export async function getStaticPaths(){const entries=await getEntries('projects');return entries.map(entry=>({params:{slug:entry.slug},props:{entry}}));}
+const {entry}=Astro.props;
+---
+<Base title={`${clean(entry.title.rendered)} | NEXORA Energy`}><section class="page-hero"><div class="container"><a class="back-link" href="/projects">← All projects</a><span class="eyebrow accent">PROJECT SPOTLIGHT</span><h1>{clean(entry.title.rendered)}</h1></div></section><section class="section section-white"><div class="container">{imageOf(entry)&&<img class="article-image" src={imageOf(entry)} alt={entry._embedded?.['wp:featuredmedia']?.[0]?.alt_text||clean(entry.title.rendered)}/>}<article class="body-copy" set:html={entry.content?.rendered||entry.excerpt?.rendered||''}/></div></section></Base>

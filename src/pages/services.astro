@@ -1,0 +1,5 @@
+---
+import Base from '../layouts/Base.astro';
+const services=[['01','Engineering & Technical Services','Concept development, multidisciplinary engineering, technical advisory, and design coordination.'],['02','Asset Integrity & Operations','Asset performance, inspection planning, reliability thinking, and operational support.'],['03','Project & Industrial Solutions','Project coordination, industrial solutions, and execution support for complex environments.']];
+---
+<Base title="Expertise | NEXORA Energy"><section class="page-hero"><div class="container"><span class="eyebrow accent">WHAT WE DO</span><h1>Expertise with<br/>real-world purpose.</h1><p>Connected capabilities for evolving energy and industrial challenges.</p></div></section><section class="section section-dark"><div class="container"><div class="service-grid">{services.map(([n,title,desc])=><article class="service-card"><span class="service-number">{n} / EXPERTISE</span><div><h3>{title}</h3><p>{desc}</p></div></article>)}</div></div></section></Base>
