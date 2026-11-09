@@ -1,0 +1,47 @@
+name: Visual QA screenshots
+
+on:
+  push:
+    branches: [feat/astro-v1]
+    paths:
+      - '.github/workflows/visual-qa.yml'
+      - 'scripts/visual-qa.mjs'
+      - 'src/**'
+      - 'public/images/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  screenshots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout review branch
+        uses: actions/checkout@v4
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install app and visual QA tooling
+        run: |
+          npm install --no-audit --no-fund
+          npm install --no-save --no-audit --no-fund playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Build against live WordPress CMS
+        run: npm run build
+        env:
+          CMS_STRICT: 'true'
+      - name: Start static preview and capture responsive screenshots
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/nexora-preview.log 2>&1 &
+          sleep 2
+          node scripts/visual-qa.mjs
+      - name: Upload visual review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexora-visual-qa
+          path: screenshots/
+          retention-days: 14
