@@ -1,0 +1,35 @@
+---
+import { clean, imageOf, type Entry } from '../lib/content';
+
+interface Props {
+  entry?: Entry;
+  fallbackTitle?: string;
+  fallbackImage?: string;
+  index?: number;
+  label?: string;
+}
+const {
+  entry,
+  fallbackTitle = 'Engineering for complex environments',
+  fallbackImage = '/images/offshore-project.jpg',
+  index = 0,
+  label = 'CONCEPT / INDUSTRIAL'
+} = Astro.props;
+
+const title = entry ? clean(entry.title.rendered) : fallbackTitle;
+const href = entry ? `/projects/${entry.slug}/` : '/projects/';
+const image = entry ? (imageOf(entry) || fallbackImage) : fallbackImage;
+const alt = entry && imageOf(entry)
+  ? (entry._embedded?.['wp:featuredmedia']?.[0]?.alt_text || '')
+  : 'Illustrative photograph of energy and industrial infrastructure';
+const meta = entry ? `PROJECT / ${String(index + 1).padStart(2,'0')}` : label;
+---
+<a class="project-card" href={href} aria-label={title}>
+  <div class="project-photo">
+    <img src={image} alt={alt} loading="lazy" decoding="async" width="1500" height="844" />
+  </div>
+  <div class="project-info">
+    <span>{meta}</span>
+    <h3>{title}</h3>
+  </div>
+</a>
