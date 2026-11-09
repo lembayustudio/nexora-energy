@@ -1,14 +1,137 @@
 ---
 import Base from '../layouts/Base.astro';
-import {getEntries,clean,formatEventDate} from '../lib/content';
+import {getEntries, clean, formatEventDate} from '../lib/content';
 import ProjectCard from '../components/ProjectCard.astro';
+
 const projects=(await getEntries('projects')).slice(0,2);
 const events=(await getEntries('events')).slice(0,2);
+
+const heroPanels=[
+  {image:'/images/industrial-plant.jpg',position:'center'},
+  {image:'/images/industrial-detail.jpg',position:'48% center'},
+  {image:'/images/offshore-hero.jpg',position:'57% center'},
+  {image:'/images/offshore-project.jpg',position:'center'}
+];
+const disciplines=['ENGINEERING','ASSET INTEGRITY','OPERATIONS','PROJECT DELIVERY'];
+const expertise=[
+  {number:'01',label:'ENGINEERING',title:'Engineering & Technical Services',description:'Shaping a clear technical direction, from early planning through coordinated execution.'},
+  {number:'02',label:'ASSET LIFECYCLE',title:'Asset Integrity & Operations',description:'Connecting inspection, reliability and operational priorities across an asset’s lifecycle.'},
+  {number:'03',label:'PROJECT DELIVERY',title:'Project & Industrial Solutions',description:'Helping complex work move forward through practical coordination and delivery support.'}
+];
 ---
-<Base><section class="hero"><div class="hero-image"></div><div class="container hero-content"><span class="eyebrow accent">ENGINEERING A BETTER TOMORROW / 001</span><h1>Progress is<br/>built on <em>purpose.</em></h1><div class="hero-lead"><p>We bring clarity to complex energy challenges through engineering expertise, trusted partnerships, and a relentless focus on what comes next.</p><a class="btn" href="/about">Discover our story <span aria-hidden="true">↗</span></a></div><div class="hero-index" aria-hidden="true"><span>FIELD NOTES / N° 001</span><span class="hero-index-line"></span><span>ENGINEERING IN MOTION</span></div></div></section>
-<section class="section section-light"><div class="container"><div class="intro-grid"><div><span class="eyebrow">01 / WHO WE ARE</span><h2>Grounded in expertise.<br/>Focused on impact.</h2></div><div><p>From early-stage strategy to on-the-ground execution, we connect the people, capabilities, and thinking that move ambitious energy projects forward.</p><a class="btn btn-dark" href="/about">More about us <span aria-hidden="true">↗</span></a></div></div><div class="stats" aria-label="Our approach"><div class="stat"><strong>01</strong><span>Understand the challenge</span></div><div class="stat"><strong>02</strong><span>Engineer the solution</span></div><div class="stat"><strong>03</strong><span>Deliver with purpose</span></div></div></div></section>
-<section class="visual-story" aria-label="Industrial photography"><div class="container"><figure class="visual-story-figure"><img src="/images/industrial-plant.jpg" width="1600" height="1067" alt="Industrial refinery infrastructure and processing towers, illustrative photography" loading="lazy" decoding="async"/><figcaption><span class="eyebrow accent">FIELD STUDY / 01</span><strong>Perspective changes<br/>everything.</strong><span class="visual-caption-note">INDUSTRIAL INFRASTRUCTURE · EDITORIAL IMAGE</span></figcaption></figure></div></section>
-<section class="section section-dark"><div class="container"><div class="section-heading"><div><span class="eyebrow accent">02 / OUR EXPERTISE</span><h2>Capability that<br/>moves industries.</h2></div><p>Practical solutions shaped around the demands of today's industrial and energy landscape.</p></div><div class="service-grid"><a class="service-card" href="/services"><span class="service-number">01 / ENGINEERING</span><div><h3>Engineering &<br/>Technical Services</h3><p>Integrated technical thinking from concept through execution.</p></div><span class="arrow" aria-hidden="true">↗</span></a><a class="service-card" href="/services"><span class="service-number">02 / OPERATIONS</span><div><h3>Asset Integrity &<br/>Operations</h3><p>Smarter approaches to reliability, performance, and resilience.</p></div><span class="arrow" aria-hidden="true">↗</span></a><a class="service-card" href="/services"><span class="service-number">03 / DELIVERY</span><div><h3>Project &<br/>Industrial Solutions</h3><p>Connecting expertise and execution for complex environments.</p></div><span class="arrow" aria-hidden="true">↗</span></a></div></div></section>
-<section class="section section-white"><div class="container"><div class="section-heading"><div><span class="eyebrow">03 / SELECTED WORK</span><h2>Where ambition<br/>meets execution.</h2></div><a class="btn btn-dark" href="/projects">Explore projects <span aria-hidden="true">↗</span></a></div><div class="project-grid">{projects.length ? projects.map((entry,i)=><ProjectCard entry={entry} index={i}/>) : <><ProjectCard fallbackTitle="Engineering for critical infrastructure" fallbackImage="/images/offshore-project.jpg" label="CONCEPT / ENGINEERING"/><ProjectCard fallbackTitle="Smarter industrial operations" fallbackImage="/images/industrial-plant.jpg" label="CONCEPT / INDUSTRIAL"/></>}</div></div></section>
-{events.length > 0 && <section class="section section-light"><div class="container"><div class="section-heading"><div><span class="eyebrow">04 / LATEST STORIES</span><h2>Stay in the<br/>conversation.</h2></div><a class="btn btn-dark" href="/events">All updates <span aria-hidden="true">↗</span></a></div><div class="event-grid">{events.map(e=><a class="event-card" href={`/events/${e.slug}/`}><div class="event-media"><img class="event-photo" src="/images/conference.jpg" alt="Illustrative photograph of professionals attending an industry conference" width="1400" height="933" loading="eager" decoding="async"/></div><div class="event-card-content"><span class="eyebrow accent">{formatEventDate(e.acf?.event_date || e.date)}</span><h3>{clean(e.title.rendered)}</h3><p>{clean(e.excerpt?.rendered || '')}</p><span class="event-read">Read event <span aria-hidden="true">↗</span></span></div></a>)}</div></div></section>}
-<section class="section section-light"><div class="container"><div class="cta-panel"><div><span class="eyebrow">THE NEXT CHAPTER</span><h2>Let's build what<br/>comes next.</h2></div><a class="btn btn-dark" href="/contact">Start a conversation <span aria-hidden="true">↗</span></a></div></div></section></Base>
+<Base>
+  <section class="v3-hero" aria-labelledby="hero-heading">
+    <div class="v3-hero-mosaic" aria-hidden="true">
+      {heroPanels.map(panel => <div class="v3-hero-panel" style={`background-image:url('${panel.image}');background-position:${panel.position}`}></div>)}
+    </div>
+    <div class="container v3-hero-content">
+      <span class="v3-hero-kicker">ENERGY ENGINEERING / A NEW PERSPECTIVE</span>
+      <h1 id="hero-heading">Progress is built<br/>on <span>purpose.</span></h1>
+      <p>Solving complex energy and industrial challenges with clarity, capability, and a commitment to what comes next.</p>
+      <a class="v3-action v3-action-accent" href="/about">Discover our approach <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="container v3-hero-bottom">
+      <span class="v3-hero-marker">NEXORA / IN FOCUS</span>
+      <nav class="v3-hero-jump" aria-label="Explore homepage sections">
+        <a href="#about"><span>01</span> Who we are</a>
+        <a href="#expertise"><span>02</span> Our expertise</a>
+        <a href="#work"><span>03</span> Selected work</a>
+      </nav>
+      <a class="v3-scroll-cue" href="#about" aria-label="Scroll to our approach">↓</a>
+    </div>
+  </section>
+
+  <section class="v3-overview" id="about" aria-labelledby="overview-heading">
+    <div class="container">
+      <div class="v3-overview-top">
+        <p>Connecting technical thinking and practical execution to move energy projects forward.</p>
+        <span class="v3-tag">A CONNECTED APPROACH</span>
+      </div>
+      <div class="v3-discipline-row" aria-label="Our core disciplines">
+        {disciplines.map((discipline,i)=><span><span aria-hidden="true">0{i+1} / </span>{discipline}</span>)}
+      </div>
+      <div class="v3-intro-line">
+        <span class="v3-tag v3-tag-accent">01 / ABOUT NEXORA</span>
+        <h2 id="overview-heading">Grounded in expertise.<br/><span>Built for what’s next.</span></h2>
+      </div>
+      <div class="v3-bento">
+        <article class="v3-bento-card v3-bento-system">
+          <span class="v3-card-kicker">CONNECTED CAPABILITIES</span>
+          <strong class="v3-bento-number">01<span>—</span>03</strong>
+          <p>From understanding the challenge to delivering the solution.</p>
+          <div class="v3-orbit" aria-hidden="true"><span></span><span></span><span></span></div>
+          <a href="/about" class="v3-card-link">Our approach <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="v3-bento-card v3-bento-principle">
+          <div class="v3-card-topline"><span class="v3-symbol" aria-hidden="true">✳</span><span>WORKING PRINCIPLE / 001</span></div>
+          <p>Complex problems call for <strong>clear thinking.</strong> Great engineering begins with the right questions.</p>
+          <div class="v3-card-foot"><span>NEXORA ENERGY</span><span>ENGINEERING WITH PURPOSE</span></div>
+        </article>
+        <article class="v3-bento-card v3-bento-photo">
+          <img src="/images/industrial-detail.jpg" width="1400" height="933" alt="Illustrative photograph of industrial pipeline infrastructure" loading="lazy" decoding="async"/>
+          <div class="v3-photo-caption"><span>IN CONTEXT / 01</span><strong>Built for the<br/>real world.</strong><span>ILLUSTRATIVE PHOTOGRAPHY</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="v3-tech" id="expertise" aria-labelledby="tech-heading">
+    <div class="container">
+      <div class="v3-tech-heading">
+        <div>
+          <span class="v3-tag v3-tag-accent">02 / OUR EXPERTISE</span>
+          <h2 id="tech-heading">Different disciplines.<br/><span>One connected approach.</span></h2>
+        </div>
+        <p>Energy projects are rarely solved by one specialty. Our approach brings technical thinking, asset knowledge and delivery into focus.</p>
+      </div>
+
+      <div class="v3-expertise-layout">
+        <div class="v3-capability-list">
+          {expertise.map(item => <article class="v3-capability">
+            <div class="v3-capability-meta"><span class="v3-capability-index">{item.number}</span><span>{item.label}</span></div>
+            <div class="v3-capability-body"><h3>{item.title}</h3><p>{item.description}</p></div>
+            <span class="v3-capability-symbol" aria-hidden="true">✳</span>
+          </article>)}
+          <a class="v3-expertise-link" href="/services">Explore our expertise <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <figure class="v3-systems-board">
+          <img src="/images/industrial-plant.jpg" width="1750" height="1167" loading="lazy" decoding="async" alt="Illustrative industrial processing facility with interconnected pipelines and structural systems"/>
+          <div class="v3-systems-board-content">
+            <div class="v3-systems-topline"><span>NX / FIELD PERSPECTIVE</span><span>CONNECTED THINKING / 001</span></div>
+            <div class="v3-systems-center" aria-hidden="true">
+              <span class="v3-systems-ring v3-ring-outer"></span>
+              <span class="v3-systems-ring v3-ring-inner"></span>
+              <span class="v3-systems-core">N<span>.</span></span>
+              <span class="v3-systems-coordinate">ENGINEERING + OPERATIONS + DELIVERY</span>
+            </div>
+            <figcaption class="v3-systems-footer">
+              <strong>From planning<br/>to performance.</strong>
+              <span>INDUSTRIAL CONTEXT / ILLUSTRATIVE PHOTOGRAPHY</span>
+            </figcaption>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-white v3-work" id="work" aria-labelledby="work-heading">
+    <div class="container">
+      <div class="section-heading"><div><span class="v3-tag v3-tag-accent">03 / SELECTED WORK</span><h2 id="work-heading">Where ambition<br/>meets execution.</h2></div><a class="v3-text-arrow" href="/projects">Explore projects <span aria-hidden="true">↗</span></a></div>
+      <div class="project-grid">
+        {projects.length ? projects.map((entry,i)=><ProjectCard entry={entry} index={i}/>) : <>
+          <ProjectCard fallbackTitle="Engineering for critical infrastructure" fallbackImage="/images/offshore-project.jpg" label="CONCEPT / ENGINEERING"/>
+          <ProjectCard fallbackTitle="Smarter industrial operations" fallbackImage="/images/industrial-plant.jpg" label="CONCEPT / INDUSTRIAL"/>
+        </>}
+      </div>
+    </div>
+  </section>
+
+  {events.length > 0 && <section class="section section-light v3-events" aria-labelledby="events-heading"><div class="container">
+    <div class="section-heading"><div><span class="v3-tag v3-tag-accent">04 / LATEST STORIES</span><h2 id="events-heading">On the ground.<br/>In the conversation.</h2></div><a class="v3-text-arrow" href="/events">Explore events <span aria-hidden="true">↗</span></a></div>
+    <div class="event-grid">{events.map(e=><a class="event-card" href={`/events/${e.slug}/`}>
+      <div class="event-media"><img class="event-photo" src="/images/conference.jpg" alt="Illustrative photography of an industry conference" width="1400" height="933" loading="lazy" decoding="async"/></div>
+      <div class="event-card-content"><span class="eyebrow">{formatEventDate(e.acf?.event_date || e.date)}</span><h3>{clean(e.title.rendered)}</h3><p>{clean(e.excerpt?.rendered || '')}</p><span class="event-read">Discover event <span aria-hidden="true">↗</span></span></div>
+    </a>)}</div>
+  </div></section>}
+</Base>
