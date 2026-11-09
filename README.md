@@ -18,7 +18,7 @@ npm run build
 ## CMS integration
 By default, the build fetches:
 - `https://cms.lembayu.com/wp-json/wp/v2/projects?_embed&per_page=100`
-- `https://cms.lembayu.com/wp-json/wp/v2/events?_embed&per_page=30`
+- `https://cms.lembayu.com/wp-json/wp/v2/events?_embed&per_page=100`
 
 Override the endpoint with `WP_API_URL` (base URL ending in `/wp-json/wp/v2`).
 
@@ -28,7 +28,7 @@ The project detail pages also render ACF project metadata and image galleries; e
 
 ## Art direction & image provenance
 
-V2 includes locally served photographic imagery with photographer credits in [docs/image-credits.md](docs/image-credits.md). A one-time image sync workflow downloads and commits optimized photographs to the development branch. The build also downloads missing files before compilation. Once present, images are served directly from the static site.
+V2 includes locally served photographic imagery with photographer credits in [docs/image-credits.md](docs/image-credits.md). Curated photographs have been downloaded, verified, and committed under `public/images/`. The build also downloads missing files before compilation. Once present, images are served directly from the static site.
 
 ## WordPress → Netlify rebuild
 
@@ -38,10 +38,10 @@ A minimal standalone WordPress plugin triggers Netlify rebuilds when published P
 The GitHub Actions workflow runs Astro/TypeScript checks, a strict live-CMS build and static output smoke tests. It also uploads a downloadable site artifact for inspection.
 
 ## Deployment
-Netlify settings are committed in `netlify.toml`. For the temporary live preview, follow [the Netlify setup guide](docs/netlify-preview.md) to connect the existing GitHub repo and deploy the `feat/astro-v1` branch without merging. WordPress-to-Netlify publish webhook is not yet configured.
+Netlify settings are committed in `netlify.toml`. The website is connected to Netlify and WordPress updates have been confirmed to trigger live builds. For the transition from the review branch to `main`, follow [the production handoff checklist](docs/production-handoff.md). The Netlify production branch and Build Hook target must both point to `main` after migration.
 
 ## Notes
 - NEXORA Energy is **not a real company**. Metrics and imagery are conceptual.
-- Replace remote stock imagery with appropriately licensed, optimized assets before production.
+- Curated Pexels imagery is locally stored and credited in `docs/image-credits.md`; imagery remains illustrative, not evidence of real projects.
 - WordPress HTML is rendered from a trusted CMS; restrict editorial access and sanitize untrusted content.
 - Astro picks up the actual Netlify deploy URL from `DEPLOY_PRIME_URL` during builds. The prototype includes a `noindex` response header until final review.

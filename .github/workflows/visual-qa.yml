@@ -2,7 +2,7 @@ name: Visual QA screenshots
 
 on:
   push:
-    branches: [feat/astro-v1]
+    branches: [main, feat/astro-v1]
     paths:
       - '.github/workflows/visual-qa.yml'
       - 'scripts/visual-qa.mjs'

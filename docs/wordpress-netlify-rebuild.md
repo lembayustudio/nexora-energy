@@ -22,7 +22,7 @@ This uses WordPress's `wp_after_insert_post`, `acf/save_post`, status transition
 1. Download the installer ZIP from the `WordPress plugin ZIP` GitHub Actions artifact, or create a ZIP whose root contains the `nexora-netlify-rebuild/` folder with the PHP plugin.
 2. In WordPress go to **Plugins → Add New Plugin → Upload Plugin** and upload `nexora-netlify-rebuild.zip`.
 3. Click **Install Now → Activate Plugin**.
-4. In Netlify open **Project configuration → Developer settings → Continuous deployment → Build hooks**. Create a hook named `WordPress Projects and Events`, selecting **feat/astro-v1**.
+4. In Netlify open **Project configuration → Developer settings → Continuous deployment → Build hooks**. Create a hook named `WordPress Projects and Events`, selecting **the current Netlify production branch** (use `main` after migration).
 5. **Keep the secret URL private.** Copy it directly to **WordPress → Settings → Nexora Rebuild**. The field is write-only; saving an empty field keeps the existing value.
 6. Click **Send test rebuild** on the plugin settings screen. Check Netlify's Deploys tab for a new build.
 7. Update the existing published demo Project or Event in WordPress and verify that a second build starts automatically. Check the live site after the build completes.
@@ -31,7 +31,7 @@ Important: Netlify's Build Hook URL is a credential. **Never commit it to GitHub
 
 ## Production behavior
 
-- This prototype uses the Netlify production branch **feat/astro-v1**. When the project is approved and production moves to **main**, create a new build hook for **main** and replace the URL in plugin settings.
+- The preview site originally used **feat/astro-v1**. After merging, switch Netlify's production branch to **main**, create a new build hook for **main**, and replace the URL in plugin settings. See [production handoff](production-handoff.md).
 - One save request produces at most one rebuild request; separate successive saves can trigger separate builds. This simple prototype does not debounce across requests.
 - The outbound request is HTTPS-only and can only target the official `api.netlify.com/build_hooks/…` endpoint. The plugin doesn't expose a public REST route.
 - WordPress stores the hook in a normal WordPress option (not encrypted at rest). Secure the WordPress admin, database and backups.

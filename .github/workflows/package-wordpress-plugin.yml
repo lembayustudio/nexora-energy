@@ -2,7 +2,7 @@ name: Package WordPress rebuild plugin
 
 on:
   push:
-    branches: [feat/astro-v1]
+    branches: [main, feat/astro-v1]
     paths:
       - 'wordpress/nexora-netlify-rebuild/**'
       - '.github/workflows/package-wordpress-plugin.yml'
