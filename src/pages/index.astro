@@ -14,10 +14,9 @@ const heroPanels=[
 ];
 const disciplines=['ENGINEERING','ASSET INTEGRITY','OPERATIONS','PROJECT DELIVERY'];
 const expertise=[
-  {number:'01',type:'Engineering',title:'Technical solutions',description:'Clear, multidisciplinary thinking from early planning through execution.',bright:true},
-  {number:'02',type:'Asset Integrity',title:'Reliability by design',description:'Practical approaches to inspection, maintenance and lifecycle planning.',bright:false},
-  {number:'03',type:'Operations',title:'Field-ready support',description:'Connecting technical expertise with demanding operating environments.',bright:false},
-  {number:'04',type:'Project Delivery',title:'Coordinated execution',description:'Bringing people, processes and priorities together around the work.',bright:true}
+  {number:'01',label:'ENGINEERING',title:'Engineering & Technical Services',description:'Shaping a clear technical direction, from early planning through coordinated execution.'},
+  {number:'02',label:'ASSET LIFECYCLE',title:'Asset Integrity & Operations',description:'Connecting inspection, reliability and operational priorities across an asset’s lifecycle.'},
+  {number:'03',label:'PROJECT DELIVERY',title:'Project & Industrial Solutions',description:'Helping complex work move forward through practical coordination and delivery support.'}
 ];
 ---
 <Base>
@@ -79,21 +78,38 @@ const expertise=[
   <section class="v3-tech" id="expertise" aria-labelledby="tech-heading">
     <div class="container">
       <div class="v3-tech-heading">
-        <div><span class="v3-tag v3-tag-lime">02 / OUR EXPERTISE</span><h2 id="tech-heading">Technical thinking.<br/><span>Practical impact.</span></h2></div>
-        <p>Integrated capabilities, shaped around the demands of complex industrial and energy environments.</p>
-      </div>
-      <div class="v3-tech-grid">
-        <div class="v3-tech-cards">
-          {expertise.map(item=><article class:list={['v3-tech-card',{'is-bright':item.bright}]}>
-            <div class="v3-tech-card-head"><span>{item.number} / {item.type}</span><span class="v3-tech-dot" aria-hidden="true">✳</span></div>
-            <div><h3>{item.title}</h3><p>{item.description}</p></div>
-          </article>)}
-          <a class="v3-expertise-link" href="/services">Explore all expertise <span aria-hidden="true">↗</span></a>
+        <div>
+          <span class="v3-tag v3-tag-lime">02 / OUR EXPERTISE</span>
+          <h2 id="tech-heading">Different disciplines.<br/><span>One connected approach.</span></h2>
         </div>
-        <figure class="v3-schematic">
-          <div class="v3-diagram-header"><span>ENGINEERING / IN DETAIL</span><span>TECHNICAL STUDY — 001</span></div>
-          <img src="/illustrations/pumpjack-schematic.svg" width="840" height="820" alt="Conceptual technical line drawing of an oil pumpjack with structural beams and annotations; not an engineering specification" loading="lazy" decoding="async"/>
-          <figcaption>CONCEPTUAL ENGINEERING DIAGRAM · NOT TO SCALE</figcaption>
+        <p>Energy projects are rarely solved by one specialty. Our approach brings technical thinking, asset knowledge and delivery into focus.</p>
+      </div>
+
+      <div class="v3-expertise-layout">
+        <div class="v3-capability-list">
+          {expertise.map(item => <article class="v3-capability">
+            <div class="v3-capability-meta"><span class="v3-capability-index">{item.number}</span><span>{item.label}</span></div>
+            <div class="v3-capability-body"><h3>{item.title}</h3><p>{item.description}</p></div>
+            <span class="v3-capability-symbol" aria-hidden="true">✳</span>
+          </article>)}
+          <a class="v3-expertise-link" href="/services">Explore our expertise <span aria-hidden="true">↗</span></a>
+        </div>
+
+        <figure class="v3-systems-board">
+          <img src="/images/industrial-plant.jpg" width="1750" height="1167" loading="lazy" decoding="async" alt="Illustrative industrial processing facility with interconnected pipelines and structural systems"/>
+          <div class="v3-systems-board-content">
+            <div class="v3-systems-topline"><span>NX / FIELD PERSPECTIVE</span><span>CONNECTED THINKING / 001</span></div>
+            <div class="v3-systems-center" aria-hidden="true">
+              <span class="v3-systems-ring v3-ring-outer"></span>
+              <span class="v3-systems-ring v3-ring-inner"></span>
+              <span class="v3-systems-core">N<span>.</span></span>
+              <span class="v3-systems-coordinate">ENGINEERING + OPERATIONS + DELIVERY</span>
+            </div>
+            <figcaption class="v3-systems-footer">
+              <strong>From planning<br/>to performance.</strong>
+              <span>INDUSTRIAL CONTEXT / ILLUSTRATIVE PHOTOGRAPHY</span>
+            </figcaption>
+          </div>
         </figure>
       </div>
     </div>

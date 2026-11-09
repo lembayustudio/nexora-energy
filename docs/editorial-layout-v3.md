@@ -8,7 +8,7 @@ A design-only iteration based on four screenshots supplied by the portfolio owne
 | --- | --- |
 | ExxonMobil multi-panel cinematic hero | Four-column full-bleed mosaic using existing licensed NEXORA photographs, grounded headline and useful section links. No mock carousel controls. |
 | Petrova white editorial bento | Three cards highlighting the *process*, the *working principle*, and illustrative infrastructure photography. No fictional client names or fake KPIs. |
-| Petrova acid-lime technology layout | Modular discipline cards, a self-contained concept technical drawing, restrained signal-lime accents and clear scope-based labels. |
+| Petrova acid-lime technology layout | A custom editorial engineering section with three horizontal capability rows and a photographic systems-thinking panel. We retain technical visual language and modularity without copying the drilling illustration or 2×2 card grid. |
 | Petrova oversized dark footer | Monumental NEXORA wordmark with actual navigation/contact links and visible fictional-portfolio disclaimer. |
 
 ## Explicitly preserved
@@ -22,4 +22,4 @@ A design-only iteration based on four screenshots supplied by the portfolio owne
 
 This work lives on `feat/editorial-layout-v3` as a PR into `main`. Do **not merge or publish to the Netlify production branch** until the owner has reviewed browser screenshot artifacts and Netlify credits are available. The GitHub Actions visual QA workflow runs on pull requests and uploads the screenshots without spending Netlify production-deploy credits.
 
-The technical schematic is illustrative and explicitly labeled **not to scale**, not a certified engineering drawing.
+The photographic systems panel is illustrative art direction, not a technical engineering specification or claim about actual assets.
