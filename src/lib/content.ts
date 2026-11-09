@@ -53,8 +53,13 @@ export const galleryOf = (entry: Entry): Array<{url:string;alt:string}> => {
 
 export const formatEventDate = (date?: string): string => {
   if (!date) return 'Date to be announced';
-  const parsed = new Date(date + 'T12:00:00');
-  return Number.isNaN(parsed.getTime()) ? date : new Intl.DateTimeFormat('en-MY', { day: 'numeric', month: 'long', year: 'numeric', timeZone:'Asia/Kuala_Lumpur' }).format(parsed);
+  // ACF can return YYYY-MM-DD, YYYYMMDD or a datetime string depending on field settings.
+  const match = /^(\d{4})-?(\d{2})-?(\d{2})/.exec(date.trim());
+  if (!match) return date;
+  const [,year,month,day] = match;
+  const parsed = new Date(Date.UTC(Number(year),Number(month)-1,Number(day),12));
+  if (parsed.getUTCFullYear() !== Number(year) || parsed.getUTCMonth()+1 !== Number(month) || parsed.getUTCDate() !== Number(day)) return date;
+  return new Intl.DateTimeFormat('en-MY', {day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(parsed);
 };
 
 const cache = new Map<string, Promise<Entry[]>>();
