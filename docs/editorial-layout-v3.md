@@ -9,7 +9,7 @@ A design-only iteration based on four screenshots supplied by the portfolio owne
 | ExxonMobil multi-panel cinematic hero | Four-column full-bleed mosaic using existing licensed NEXORA photographs, grounded headline and useful section links. No mock carousel controls. |
 | Petrova white editorial bento | Three cards highlighting the *process*, the *working principle*, and illustrative infrastructure photography. No fictional client names or fake KPIs. |
 | Petrova modular technology layout | A custom editorial engineering section with three horizontal capability rows and a photographic systems-thinking panel. We retain the modular engineering visual language without copying the drilling illustration or 2×2 card grid. Accent colors use NEXORA’s original warm copper, not the reference’s neon lime. |
-| Petrova oversized dark footer | Monumental NEXORA wordmark with actual navigation/contact links and visible fictional-portfolio disclaimer. |
+| Petrova oversized dark footer | Reinterpreted as a restrained, corporate footer: standard brand on the left with a tagline below, navigation on the right, and centered brand on mobile; the concept disclaimer stays visible. |
 
 ## Explicitly preserved
 
@@ -27,3 +27,7 @@ The photographic systems panel is illustrative art direction, not a technical en
 ## Brand color refinement
 
 V3 uses the original NEXORA signature copper `#D9A16C` on dark and light components. Neon-lime accents were removed from hero CTAs, section labels, icons, cards, focus styling, diagram highlights, and footer. The existing navy/charcoal neutrals and layout are intentionally retained.
+
+## Approved corporate footer refinement
+
+The oversized NEXORA wordmark was removed after review because it competed with the rest of the website and reduced the corporate impression. Desktop now uses a standard-sized NEXORA Energy brand aligned left, with the tagline **“Built on engineering. Focused on delivery.”** and concise contextual copy. Navigation is grouped on the right. Mobile centers the logo and tagline, with accessible link columns below. All existing routes remain functional; no fake addresses, phone numbers, or client claims are added.

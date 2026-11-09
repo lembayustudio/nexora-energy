@@ -8,17 +8,37 @@ const isActive=(href:string)=>href==='/'?path==='/':path===href||path.startsWith
 ---
 <!doctype html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="description" content={description}/><meta name="theme-color" content="#101a1c"/><link rel="icon" type="image/svg+xml" href="/favicon.svg"/><title>{title}</title><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/></head>
 <body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="container header-inner"><a class="brand" href="/" aria-label="Nexora Energy home"><span class="brand-mark">N<span class="brand-dot">.</span></span><span class="brand-name">NEXORA <small>ENERGY</small></span></a><nav class="desktop-nav" aria-label="Main navigation">{nav.map(([href,label])=><a href={href} aria-current={isActive(href)?'page':undefined}>{label}</a>)}</nav><a class="header-cta" href="/contact">Let's talk <span aria-hidden="true">↗</span></a><details class="mobile-menu"><summary aria-label="Toggle navigation">Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Mobile navigation">{nav.map(([href,label])=><a href={href} aria-current={isActive(href)?'page':undefined}>{label}</a>)}</nav></details></div></header>
-<main id="main"><slot/></main><footer class="site-footer v3-footer" aria-labelledby="footer-heading">
+<main id="main"><slot/></main><footer class="site-footer v3-footer" aria-label="Site footer">
   <div class="container">
-    <div class="v3-footer-top">
-      <div><span class="v3-footer-kicker">THE NEXT CHAPTER / STARTS HERE</span><h2 id="footer-heading">The next generation of<br/><span>energy thinking.</span></h2></div>
-      <div class="v3-footer-contacts">
-        <div><span>OUR EXPERTISE</span><a href="/services">What we do ↗</a><a href="/projects">Selected projects ↗</a></div>
-        <div><span>GET IN TOUCH</span><a href="/contact">Start a conversation ↗</a><a href="/about">About the concept ↗</a></div>
+    <div class="v3-footer-main">
+      <div class="v3-footer-identity">
+        <a class="v3-footer-logo" href="/" aria-label="NEXORA Energy — Home">
+          <span class="v3-footer-logo-mark" aria-hidden="true">N<span>.</span></span>
+          <span class="v3-footer-logo-type">NEXORA <small>ENERGY</small></span>
+        </a>
+        <p class="v3-footer-tagline">Built on engineering.<br/>Focused on delivery.</p>
+        <p class="v3-footer-description">Clear thinking and practical solutions for complex energy and industrial challenges.</p>
       </div>
+      <nav class="v3-footer-links" aria-label="Footer navigation">
+        <div class="v3-footer-linkgroup">
+          <h2>EXPLORE</h2>
+          <a href="/about">About NEXORA</a>
+          <a href="/services">Our expertise</a>
+          <a href="/projects">Projects</a>
+          <a href="/events">Events & updates</a>
+        </div>
+        <div class="v3-footer-linkgroup">
+          <h2>CONNECT</h2>
+          <a href="/contact">Contact us <span aria-hidden="true">↗</span></a>
+          <a href="/about">Our approach</a>
+          <a href="/projects">Selected work</a>
+        </div>
+      </nav>
     </div>
-    <div class="v3-footer-brandrow"><span class="v3-footer-year">© {new Date().getFullYear()}</span><span class="v3-footer-wordmark" aria-hidden="true">NEXORA<span>.</span></span><a class="v3-footer-badge" href="/contact">LET'S TALK <span aria-hidden="true">↗</span></a></div>
-    <div class="v3-footer-legal"><span>NEXORA Energy · A fictional corporate portfolio concept by Lembayu Studio</span><span>Not a real company · Illustrative projects and imagery</span></div>
+    <div class="v3-footer-legal">
+      <span>© {new Date().getFullYear()} NEXORA Energy. A portfolio concept by Lembayu Studio.</span>
+      <span>Fictional company · Projects and imagery are illustrative</span>
+    </div>
   </div>
 </footer>
 <script is:inline>
