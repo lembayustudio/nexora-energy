@@ -22,7 +22,12 @@ By default, the build fetches:
 
 Override the endpoint with `WP_API_URL` (base URL ending in `/wp-json/wp/v2`).
 
-If WordPress is unavailable, the build continues with empty listing pages and sample homepage visuals. Dynamic detail pages are only generated for entries returned at build time.
+If WordPress is unavailable, the build continues with empty listing pages and sample homepage visuals. To require a live CMS connection, set `CMS_STRICT=true` during the build. Dynamic detail pages are only generated for entries returned at build time.
+
+The project detail pages also render ACF project metadata and image galleries; event pages use the ACF event date and location rather than the WordPress publish date.
+
+## Build validation
+The GitHub Actions workflow checks `npm run build` on pull requests. A passing build does **not** prove CMS connectivity; use `CMS_STRICT=true npm run build` when an external network can reach WordPress.
 
 ## Deployment
 Build with `npm run build`, then publish the `dist/` directory to a static host or cPanel public directory. Configure an authenticated deployment pipeline and a WordPress publish webhook to trigger a new build when content changes. No webhook or deployment credentials are included in this repository.

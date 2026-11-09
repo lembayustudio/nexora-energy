@@ -1,6 +1,16 @@
 ---
 import Base from '../../layouts/Base.astro';
-import {getEntries,clean} from '../../lib/content';
-const events=await getEntries('events');
+import {getEntries,clean,formatEventDate,imageOf} from '../../lib/content';
+const events=(await getEntries('events')).sort((a,b)=>(b.acf?.event_date||b.date).localeCompare(a.acf?.event_date||a.date));
 ---
-<Base title="Insights & Events | NEXORA Energy"><section class="page-hero"><div class="container"><span class="eyebrow accent">LATEST UPDATES</span><h1>Ideas, updates<br/>& what's next.</h1><p>Events and perspectives from across our evolving world.</p></div></section><section class="section section-white"><div class="container">{events.length?<div class="project-grid">{events.map(e=><a class="project-card" href={`/events/${e.slug}/`}><div class="project-info"><span>{new Date(e.date).toLocaleDateString('en-MY',{day:'numeric',month:'long',year:'numeric'})}</span><h3>{clean(e.title.rendered)}</h3><p>{clean(e.excerpt?.rendered||'Read more about this update.')}</p></div></a>)}</div>:<div class="empty-state">Events will appear here when published in WordPress and the site is rebuilt.</div>}</div></section></Base>
+<Base title="Events & Insights | NEXORA Energy">
+  <section class="page-hero"><div class="container"><span class="eyebrow accent">LATEST UPDATES</span><h1>Ideas, updates<br/>& what's next.</h1><p>Explore what is happening across our energy and industrial community.</p></div></section>
+  <section class="section section-white"><div class="container">
+    {events.length ? <div class="event-grid">
+      {events.map(e=><a class="event-card" href={`/events/${e.slug}/`}>
+        {imageOf(e) && <img class="event-photo" src={imageOf(e)} alt={e._embedded?.['wp:featuredmedia']?.[0]?.alt_text || clean(e.title.rendered)} loading="lazy"/>}
+        <div class="event-card-content"><span class="eyebrow accent">{e.acf?.event_type?.replace(/_/g,' ') || 'EVENT'} / {formatEventDate(e.acf?.event_date || e.date)}</span><h2>{clean(e.title.rendered)}</h2><p>{clean(e.excerpt?.rendered || '')}</p><span class="event-read">Discover event <span aria-hidden="true">↗</span></span></div>
+      </a>)}
+    </div> : <div class="empty-state">Events will appear here when published in WordPress and the site is rebuilt.</div>}
+  </div></section>
+</Base>
