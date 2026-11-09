@@ -201,3 +201,15 @@ body{background:var(--nx-paper)}
 @media(prefers-reduced-motion:reduce){
   .v3-action,.v3-hero-jump a{transition:none}
 }
+
+/* V3 screenshot review: mobile readability and unambiguous footer action. */
+@media(max-width:700px){
+  .v3-tech-card p{font-size:14px;line-height:1.6}
+  .v3-tech-card-head{font-size:10px}
+  .v3-hero-jump a{font-size:11px}
+  .v3-footer-brandrow{padding-bottom:60px}
+  .v3-footer-badge{position:absolute;right:0;bottom:10px;left:auto;margin:0;gap:10px;padding:9px 12px;font-size:11px}
+}
+@media(max-width:390px){
+  .v3-footer-badge{font-size:11px;gap:8px;padding:8px 11px}
+}
