@@ -17,7 +17,7 @@ npm run build
 
 ## CMS integration
 By default, the build fetches:
-- `https://cms.lembayu.com/wp-json/wp/v2/projects?_embed&per_page=30`
+- `https://cms.lembayu.com/wp-json/wp/v2/projects?_embed&per_page=100`
 - `https://cms.lembayu.com/wp-json/wp/v2/events?_embed&per_page=30`
 
 Override the endpoint with `WP_API_URL` (base URL ending in `/wp-json/wp/v2`).
@@ -27,13 +27,13 @@ If WordPress is unavailable, the build continues with empty listing pages and sa
 The project detail pages also render ACF project metadata and image galleries; event pages use the ACF event date and location rather than the WordPress publish date.
 
 ## Build validation
-The GitHub Actions workflow checks `npm run build` on pull requests. A passing build does **not** prove CMS connectivity; use `CMS_STRICT=true npm run build` when an external network can reach WordPress.
+The GitHub Actions workflow runs Astro/TypeScript checks, a strict live-CMS build and static output smoke tests. It also uploads a downloadable site artifact for inspection.
 
 ## Deployment
-Build with `npm run build`, then publish the `dist/` directory to a static host or cPanel public directory. Configure an authenticated deployment pipeline and a WordPress publish webhook to trigger a new build when content changes. No webhook or deployment credentials are included in this repository.
+Netlify settings are committed in `netlify.toml`. For the temporary live preview, follow [the Netlify setup guide](docs/netlify-preview.md) to connect the existing GitHub repo and deploy the `feat/astro-v1` branch without merging. WordPress-to-Netlify publish webhook is not yet configured.
 
 ## Notes
 - NEXORA Energy is **not a real company**. Metrics and imagery are conceptual.
 - Replace remote stock imagery with appropriately licensed, optimized assets before production.
 - WordPress HTML is rendered from a trusted CMS; restrict editorial access and sanitize untrusted content.
-- Update `site` in `astro.config.mjs` when the deployment domain is chosen.
+- Astro picks up the actual Netlify deploy URL from `DEPLOY_PRIME_URL` during builds. The prototype includes a `noindex` response header until final review.
