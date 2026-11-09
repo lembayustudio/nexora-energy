@@ -1,0 +1,23 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getEntries,clean,imageOf,galleryOf,formatEventDate} from '../../lib/content';
+export async function getStaticPaths() {
+  const entries=await getEntries('events');
+  return entries.map(entry=>({params:{slug:entry.slug},props:{entry}}));
+}
+const {entry}=Astro.props;
+const details=[
+  ['Event date',formatEventDate(entry.acf?.event_date || entry.date)],
+  ...(entry.acf?.event_end_date ? [['End date',formatEventDate(entry.acf.event_end_date)]] : []),
+  ...(entry.acf?.event_location ? [['Location',entry.acf.event_location]] : []),
+  ...(entry.acf?.event_type ? [['Event type',entry.acf.event_type.replace(/_/g,' ')]] : [])
+];
+---
+<Base title={`${clean(entry.title.rendered)} | NEXORA Energy`}>
+  <section class="page-hero"><div class="container"><a class="back-link" href="/events">← All events</a><span class="eyebrow accent">EVENTS & INSIGHTS</span><h1>{clean(entry.title.rendered)}</h1><p>{formatEventDate(entry.acf?.event_date || entry.date)}</p></div></section>
+  <section class="section section-white"><div class="container">
+    <figure class="article-figure event-figure"><img class="article-image" src={imageOf(entry) || "/images/conference.jpg"} data-fallback={imageOf(entry) ? "/images/conference.jpg" : undefined} data-fallback-alt="Illustrative photograph of an industry conference" alt={imageOf(entry) ? (entry._embedded?.['wp:featuredmedia']?.[0]?.alt_text || clean(entry.title.rendered)) : "Illustrative photo of a professional conference"} width="1600" height="1050" fetchpriority="high"/>{!imageOf(entry) && <figcaption>Illustrative event photography · Portfolio concept</figcaption>}</figure>
+    <div class="article-layout"><aside class="article-aside"><span class="eyebrow">EVENT DETAILS</span><dl class="detail-list">{details.map(([label,value])=><div><dt>{label}</dt><dd>{value}</dd></div>)}</dl></aside><article class="body-copy" set:html={entry.content?.rendered || entry.excerpt?.rendered || ''}></article></div>
+    {galleryOf(entry).length > 0 && <div class="gallery-grid">{galleryOf(entry).map(img=><img src={img.url} alt={img.alt} loading="lazy"/>)}</div>}
+  </div></section>
+</Base>

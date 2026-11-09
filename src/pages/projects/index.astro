@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';
+import {getEntries} from '../../lib/content';
+import ProjectCard from '../../components/ProjectCard.astro';
+const projects=await getEntries('projects');
+---
+<Base title="Projects | NEXORA Energy"><section class="page-hero"><div class="container"><span class="eyebrow accent">OUR WORK</span><h1>Work that speaks<br/>for itself.</h1><p>A look at the challenges, thinking, and partnerships behind our projects.</p></div></section><section class="section section-white"><div class="container">{projects.length ? <div class="project-grid">{projects.map((entry,i)=><ProjectCard entry={entry} index={i}/>)}</div> : <div class="empty-state">Projects will appear here when published in WordPress and the site is rebuilt.</div>}</div></section></Base>

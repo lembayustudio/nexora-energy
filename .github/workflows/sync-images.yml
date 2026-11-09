@@ -1,0 +1,39 @@
+name: Sync curated portfolio photography
+
+on:
+  push:
+    branches: [feat/astro-v1]
+    paths:
+      - '.github/workflows/sync-images.yml'
+      - 'scripts/prepare-images.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout approved preview branch
+        uses: actions/checkout@v4
+        with:
+          ref: feat/astro-v1
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download and validate curated photographs
+        run: node scripts/prepare-images.mjs
+      - name: Commit optimized photos to development branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/
+          if git diff --cached --quiet; then
+            echo "Images already synced"
+          else
+            git commit -m "assets: add credited curated imagery for V2"
+            git push origin HEAD:feat/astro-v1
+          fi

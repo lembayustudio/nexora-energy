@@ -1,0 +1,39 @@
+name: Astro build validation
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main, feat/astro-v1]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install packages
+        run: npm install --no-audit --no-fund
+      - name: Check Astro and TypeScript
+        run: npm run check
+      - name: Build Astro static site with live CMS requirement
+        run: npm run build
+        env:
+          CMS_STRICT: "true"
+      - name: Validate generated site output
+        run: node scripts/smoke.mjs
+      - name: Save static preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexora-static-site
+          path: dist/
+          retention-days: 7

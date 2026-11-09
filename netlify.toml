@@ -1,0 +1,16 @@
+# NEXORA Energy - preview deployment configuration
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  CMS_STRICT = "true"
+
+# Deployment previews and branch deploys reuse the same static build.
+# WordPress is read at build time, not at runtime.
+[context.deploy-preview]
+  command = "npm run build"
+
+[context.branch-deploy]
+  command = "npm run build"
