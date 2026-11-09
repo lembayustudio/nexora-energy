@@ -1,6 +1,8 @@
 name: Visual QA screenshots
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main, feat/astro-v1]
     paths:
