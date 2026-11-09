@@ -11,7 +11,8 @@ body{background:var(--nx-paper)}
 .btn-dark{background:var(--nx-ink);color:#fff}
 .btn-dark:hover{background:#293b3f;color:#fff}
 .project-photo::after{background:var(--nx-accent);color:var(--nx-ink)}
-:focus-visible{outline-color:#d9a16c}
+:focus-visible{outline-color:#9b5a27}
+.site-header :focus-visible,.v3-hero :focus-visible,.v3-footer :focus-visible{outline-color:var(--nx-accent)}
 .v3-tag{font:700 11px/1.2 'DM Sans',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:8px 11px;display:inline-block;background:#e1e5e0;color:var(--nx-ink)}
 .v3-tag-accent{background:var(--nx-accent)}
 .v3-hero{position:relative;min-height:min(900px,100svh);min-height:max(720px,100svh);color:#fff;background:#142328;display:flex;flex-direction:column;isolation:isolate;overflow:hidden}
