@@ -81,3 +81,8 @@
   .footer-bottom{font-size:12px}
 }
 @media(prefers-contrast:more){.hero::after{display:none}.desktop-nav a{color:#fff}.service-card p{color:#fff}}
+
+/* Always preserve the visual system if external web fonts cannot load. */
+.hero h1,.page-hero h1,.section-heading h2,.intro-grid h2,.cta-panel h2,
+.service-card h3,.project-info h3,.stat strong,.event-card h2,.event-card h3,
+.footer-top p{font-family:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
