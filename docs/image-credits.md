@@ -7,7 +7,7 @@ Curated photos are downloaded from Pexels during an initial image sync and compr
 | Asset | Subject / role | Photographer | Source |
 | --- | --- | --- | --- |
 | `offshore-hero.jpg` | Offshore energy platform aerial; hero | Aron Razif | https://www.pexels.com/photo/aerial-view-of-complex-platform-9336590/ |
-| `offshore-project.jpg` | Offshore rig at sunset; illustrative project fallback | GANESH RAMSUMAIR | https://www.pexels.com/photo/offshore-oil-rig-at-sunset-aerial-view-30445637/ |
+| `offshore-project.jpg` | Offshore rig at sunset; illustrative project fallback | GANESH RAMSUMAIR (fallback: Aron Razif) | https://www.pexels.com/photo/sunset-over-oil-platform-15973758/ (fallback: https://www.pexels.com/photo/aerial-view-of-complex-platform-9336590/) |
 | `industrial-plant.jpg` | Refinery infrastructure; editorial landscape | Ali Mucci | https://www.pexels.com/photo/a-photo-of-an-industrial-business-4883682/ |
 | `industrial-detail.jpg` | Sunlit pipeline; services & about | Joseph Russo | https://www.pexels.com/photo/sunlit-big-pipe-with-platform-15340288/ |
 | `conference.jpg` | Conference discussion; illustrative event fallback | RDNE Stock project | https://www.pexels.com/photo/speakers-talking-at-a-business-conference-7648048/ |
