@@ -19,7 +19,9 @@ const isActive=(href:string)=>href==='/'?path==='/':path===href||path.startsWith
       if (img.complete && img.naturalWidth > 0) markReady();
       const recover = () => {
         img.removeEventListener('error', recover);
-        img.removeAttribute('data-fallback');
+        // Keep the fallback attribute until the local replacement finishes loading.
+        // This prevents exposing an empty or partially loaded remote image.
+        img.setAttribute('data-image-source', 'fallback');
         img.alt = img.getAttribute('data-fallback-alt') || img.alt;
         img.src = fallback;
       };

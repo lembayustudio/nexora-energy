@@ -52,6 +52,15 @@ for(const route of routes){
   }
   // Eagerly resolve below-the-fold images for reproducible full-page screenshots.
   await page.locator('main img').evaluateAll(images=>images.forEach(img=>{img.loading='eager';}));
+  // Full-page screenshots do not always request below-the-fold lazy images.
+  // Scroll through the page like a visitor, then return to the top for capture.
+  await page.evaluate(async()=>{
+    for(let y=0;y<document.documentElement.scrollHeight;y+=Math.max(500,innerHeight*0.9)){
+      window.scrollTo(0,y);
+      await new Promise(resolve=>setTimeout(resolve,90));
+    }
+    window.scrollTo(0,0);
+  });
   await page.waitForTimeout(1200);
   const overflow=metrics.docWidth>metrics.viewport+1;
   if(overflow){issues++;console.warn('OVERFLOW ELEMENTS',metrics.overflowElements);}
