@@ -33,10 +33,21 @@ for(const route of routes){
    heading:document.querySelector('h1')?.textContent?.trim()||'',
    images:[...document.querySelectorAll('main img')].map(img=>({src:img.getAttribute('src'),loaded:img.complete&&img.naturalWidth>0})),
    bodyHeight:document.documentElement.scrollHeight,
-   visibleNav:document.querySelector('.desktop-nav')?.getBoundingClientRect().width
+   visibleNav:document.querySelector('.desktop-nav')?.getBoundingClientRect().width,
+   overflowElements: [...document.body.querySelectorAll('*')]
+     .map(el => ({el,rect:el.getBoundingClientRect()}))
+     .filter(({el,rect}) => rect.right > innerWidth+1 && getComputedStyle(el).position !== 'absolute')
+     .sort((a,b) => b.rect.right-a.rect.right).slice(0,12)
+     .map(({el,rect})=>({
+       element:el.tagName.toLowerCase(),
+       className:String(el.className||'').slice(0,70),
+       right:Math.round(rect.right),
+       width:Math.round(rect.width),
+       text:(el.textContent||'').trim().slice(0,65)
+     }))
   }));
   const overflow=metrics.docWidth>metrics.viewport+1;
-  if(overflow)issues++;
+  if(overflow){issues++;console.warn('OVERFLOW ELEMENTS',metrics.overflowElements);}
   const fname=`screenshots/${route.label}-${route.width}.png`;
   await page.screenshot({path:fname,fullPage:true,animations:'disabled'});
   results.push({route:route.path,width:route.width,...metrics,overflow,screenshot:fname});

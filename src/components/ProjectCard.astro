@@ -26,7 +26,7 @@ const meta = entry ? `PROJECT / ${String(index + 1).padStart(2,'0')}` : label;
 ---
 <a class="project-card" href={href} aria-label={title}>
   <div class="project-photo">
-    <img src={image} alt={alt} loading="lazy" decoding="async" width="1500" height="844" />
+    <img src={image} alt={alt} data-fallback={entry && imageOf(entry) ? fallbackImage : undefined} data-fallback-alt="Illustrative offshore oil platform at sunset" loading="lazy" decoding="async" width="1500" height="844" />
   </div>
   <div class="project-info">
     <span>{meta}</span>
