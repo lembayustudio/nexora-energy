@@ -28,7 +28,7 @@ const expertise=[
       <span class="v3-hero-kicker">ENERGY ENGINEERING / A NEW PERSPECTIVE</span>
       <h1 id="hero-heading">Progress is built<br/>on <span>purpose.</span></h1>
       <p>Solving complex energy and industrial challenges with clarity, capability, and a commitment to what comes next.</p>
-      <a class="v3-action v3-action-lime" href="/about">Discover our approach <span aria-hidden="true">↗</span></a>
+      <a class="v3-action v3-action-accent" href="/about">Discover our approach <span aria-hidden="true">↗</span></a>
     </div>
     <div class="container v3-hero-bottom">
       <span class="v3-hero-marker">NEXORA / IN FOCUS</span>
@@ -51,7 +51,7 @@ const expertise=[
         {disciplines.map((discipline,i)=><span><span aria-hidden="true">0{i+1} / </span>{discipline}</span>)}
       </div>
       <div class="v3-intro-line">
-        <span class="v3-tag v3-tag-lime">01 / ABOUT NEXORA</span>
+        <span class="v3-tag v3-tag-accent">01 / ABOUT NEXORA</span>
         <h2 id="overview-heading">Grounded in expertise.<br/><span>Built for what’s next.</span></h2>
       </div>
       <div class="v3-bento">
@@ -79,7 +79,7 @@ const expertise=[
     <div class="container">
       <div class="v3-tech-heading">
         <div>
-          <span class="v3-tag v3-tag-lime">02 / OUR EXPERTISE</span>
+          <span class="v3-tag v3-tag-accent">02 / OUR EXPERTISE</span>
           <h2 id="tech-heading">Different disciplines.<br/><span>One connected approach.</span></h2>
         </div>
         <p>Energy projects are rarely solved by one specialty. Our approach brings technical thinking, asset knowledge and delivery into focus.</p>
@@ -117,7 +117,7 @@ const expertise=[
 
   <section class="section section-white v3-work" id="work" aria-labelledby="work-heading">
     <div class="container">
-      <div class="section-heading"><div><span class="v3-tag v3-tag-lime">03 / SELECTED WORK</span><h2 id="work-heading">Where ambition<br/>meets execution.</h2></div><a class="v3-text-arrow" href="/projects">Explore projects <span aria-hidden="true">↗</span></a></div>
+      <div class="section-heading"><div><span class="v3-tag v3-tag-accent">03 / SELECTED WORK</span><h2 id="work-heading">Where ambition<br/>meets execution.</h2></div><a class="v3-text-arrow" href="/projects">Explore projects <span aria-hidden="true">↗</span></a></div>
       <div class="project-grid">
         {projects.length ? projects.map((entry,i)=><ProjectCard entry={entry} index={i}/>) : <>
           <ProjectCard fallbackTitle="Engineering for critical infrastructure" fallbackImage="/images/offshore-project.jpg" label="CONCEPT / ENGINEERING"/>
@@ -128,7 +128,7 @@ const expertise=[
   </section>
 
   {events.length > 0 && <section class="section section-light v3-events" aria-labelledby="events-heading"><div class="container">
-    <div class="section-heading"><div><span class="v3-tag v3-tag-lime">04 / LATEST STORIES</span><h2 id="events-heading">On the ground.<br/>In the conversation.</h2></div><a class="v3-text-arrow" href="/events">Explore events <span aria-hidden="true">↗</span></a></div>
+    <div class="section-heading"><div><span class="v3-tag v3-tag-accent">04 / LATEST STORIES</span><h2 id="events-heading">On the ground.<br/>In the conversation.</h2></div><a class="v3-text-arrow" href="/events">Explore events <span aria-hidden="true">↗</span></a></div>
     <div class="event-grid">{events.map(e=><a class="event-card" href={`/events/${e.slug}/`}>
       <div class="event-media"><img class="event-photo" src="/images/conference.jpg" alt="Illustrative photography of an industry conference" width="1400" height="933" loading="lazy" decoding="async"/></div>
       <div class="event-card-content"><span class="eyebrow">{formatEventDate(e.acf?.event_date || e.date)}</span><h3>{clean(e.title.rendered)}</h3><p>{clean(e.excerpt?.rendered || '')}</p><span class="event-read">Discover event <span aria-hidden="true">↗</span></span></div>
