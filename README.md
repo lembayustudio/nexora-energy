@@ -30,6 +30,10 @@ The project detail pages also render ACF project metadata and image galleries; e
 
 V2 includes locally served photographic imagery with photographer credits in [docs/image-credits.md](docs/image-credits.md). A one-time image sync workflow downloads and commits optimized photographs to the development branch. The build also downloads missing files before compilation. Once present, images are served directly from the static site.
 
+## WordPress → Netlify rebuild
+
+A minimal standalone WordPress plugin triggers Netlify rebuilds when published Projects or Events change. Follow [the installation guide](docs/wordpress-netlify-rebuild.md). Configure the **secret build hook URL only in WordPress admin**, never in this public repo.
+
 ## Build validation
 The GitHub Actions workflow runs Astro/TypeScript checks, a strict live-CMS build and static output smoke tests. It also uploads a downloadable site artifact for inspection.
 

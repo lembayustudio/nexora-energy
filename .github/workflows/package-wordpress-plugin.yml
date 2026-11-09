@@ -1,0 +1,34 @@
+name: Package WordPress rebuild plugin
+
+on:
+  push:
+    branches: [feat/astro-v1]
+    paths:
+      - 'wordpress/nexora-netlify-rebuild/**'
+      - '.github/workflows/package-wordpress-plugin.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Validate PHP syntax
+        run: php -l wordpress/nexora-netlify-rebuild/nexora-netlify-rebuild.php
+      - name: Build installable WordPress plugin ZIP
+        run: |
+          mkdir -p release
+          cd wordpress
+          zip -q -r ../release/nexora-netlify-rebuild.zip nexora-netlify-rebuild/
+          unzip -l ../release/nexora-netlify-rebuild.zip
+      - name: Publish installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nexora-netlify-rebuild-installer
+          path: release/nexora-netlify-rebuild.zip
+          retention-days: 30
