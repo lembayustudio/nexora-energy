@@ -96,7 +96,11 @@ final class Nexora_Netlify_Rebuild {
             && 'https' === strtolower( $parts['scheme'] )
             && 'api.netlify.com' === strtolower( $parts['host'] )
             && (bool) preg_match( '~^/build_hooks/[A-Za-z0-9_-]+/?$~', $parts['path'] )
-            && ! isset( $parts['user'], $parts['pass'], $parts['query'], $parts['fragment'], $parts['port'] );
+            && ! isset( $parts['user'] )
+            && ! isset( $parts['pass'] )
+            && ! isset( $parts['query'] )
+            && ! isset( $parts['fragment'] )
+            && ! isset( $parts['port'] );
     }
 
     private static function request_rebuild( $source ) {
