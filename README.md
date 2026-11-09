@@ -26,6 +26,10 @@ If WordPress is unavailable, the build continues with empty listing pages and sa
 
 The project detail pages also render ACF project metadata and image galleries; event pages use the ACF event date and location rather than the WordPress publish date.
 
+## Art direction & image provenance
+
+V2 includes locally served photographic imagery with photographer credits in [docs/image-credits.md](docs/image-credits.md). A one-time image sync workflow downloads and commits optimized photographs to the development branch. The build also downloads missing files before compilation. Once present, images are served directly from the static site.
+
 ## Build validation
 The GitHub Actions workflow runs Astro/TypeScript checks, a strict live-CMS build and static output smoke tests. It also uploads a downloadable site artifact for inspection.
 

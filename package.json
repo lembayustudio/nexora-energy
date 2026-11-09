@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "prebuild": "node scripts/prepare-images.mjs",
+    "predev": "node scripts/prepare-images.mjs"
   },
   "dependencies": {
     "astro": "^5.0.0"

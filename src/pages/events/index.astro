@@ -8,7 +8,7 @@ const events=(await getEntries('events')).sort((a,b)=>(b.acf?.event_date||b.date
   <section class="section section-white"><div class="container">
     {events.length ? <div class="event-grid">
       {events.map(e=><a class="event-card" href={`/events/${e.slug}/`}>
-        {imageOf(e) && <img class="event-photo" src={imageOf(e)} alt={e._embedded?.['wp:featuredmedia']?.[0]?.alt_text || clean(e.title.rendered)} loading="lazy"/>}
+        <img class="event-photo" src={imageOf(e) || "/images/conference.jpg"} alt={imageOf(e) ? (e._embedded?.['wp:featuredmedia']?.[0]?.alt_text || clean(e.title.rendered)) : "Illustrative photo of an industry conference"} loading="lazy" decoding="async"/>
         <div class="event-card-content"><span class="eyebrow accent">{e.acf?.event_type?.replace(/_/g,' ') || 'EVENT'} / {formatEventDate(e.acf?.event_date || e.date)}</span><h2>{clean(e.title.rendered)}</h2><p>{clean(e.excerpt?.rendered || '')}</p><span class="event-read">Discover event <span aria-hidden="true">↗</span></span></div>
       </a>)}
     </div> : <div class="empty-state">Events will appear here when published in WordPress and the site is rebuilt.</div>}
