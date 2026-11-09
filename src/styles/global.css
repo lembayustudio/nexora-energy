@@ -169,3 +169,64 @@
   .header-cta,.desktop-nav{display:none}
   .mobile-menu{display:block}
 }
+
+/* Resilient art direction while headless CMS images load */
+.project-photo{
+  background:#17343a url('/images/offshore-project.jpg') center/cover no-repeat;
+}
+.project-photo img[data-fallback]:not([data-image-ready]),
+.event-media img[data-fallback]:not([data-image-ready]),
+.article-figure img[data-fallback]:not([data-image-ready]){
+  opacity:0;
+}
+.project-photo img,.event-media img,.article-figure img{
+  transition:opacity .25s ease,transform .45s ease,filter .45s ease;
+}
+.project-photo img[data-image-ready],
+.event-media img[data-image-ready],
+.article-figure img[data-image-ready]{opacity:1}
+.event-media{
+  position:relative;
+  flex-shrink:0;
+  width:100%;
+  height:260px;
+  overflow:hidden;
+  background:#17343a url('/images/conference.jpg') center/cover no-repeat;
+}
+.event-media .event-photo{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+.event-grid > .event-card:only-child .event-media{
+  flex:0 0 48%;
+  width:48%;
+  min-height:360px;
+  height:auto;
+}
+.event-grid > .event-card:only-child .event-media .event-photo{
+  width:100%;
+  height:100%;
+  min-height:360px;
+}
+.article-figure{background-color:#17343a;background-size:cover;background-position:center}
+.article-figure.project-figure{background-image:url('/images/offshore-project.jpg')}
+.article-figure.event-figure{background-image:url('/images/conference.jpg')}
+@media(max-width:700px){
+  .event-grid > .event-card:only-child .event-media{
+    width:100%;
+    height:230px;
+    min-height:0;
+    flex:none;
+  }
+  .event-grid > .event-card:only-child .event-media .event-photo{
+    width:100%;
+    height:100%;
+    min-height:0;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .project-photo img,.event-media img,.article-figure img{transition:none}
+}

@@ -14,6 +14,9 @@ const isActive=(href:string)=>href==='/'?path==='/':path===href||path.startsWith
     document.querySelectorAll('img[data-fallback]').forEach((img) => {
       const fallback = img.getAttribute('data-fallback');
       if (!fallback) return;
+      const markReady = () => { if (img.naturalWidth > 0) img.setAttribute('data-image-ready', 'true'); };
+      img.addEventListener('load', markReady, { once: true });
+      if (img.complete && img.naturalWidth > 0) markReady();
       const recover = () => {
         img.removeEventListener('error', recover);
         img.removeAttribute('data-fallback');
