@@ -163,3 +163,9 @@
  .visual-story-figure figcaption{max-width:calc(100% - 48px)}
 }
 @media(prefers-reduced-motion:reduce){.project-photo img{transition:none}}
+
+/* Responsive header correction: keep the desktop contact action out of mobile navigation. */
+@media(max-width:1000px){
+  .header-cta,.desktop-nav{display:none}
+  .mobile-menu{display:block}
+}

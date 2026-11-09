@@ -46,6 +46,13 @@ for(const route of routes){
        text:(el.textContent||'').trim().slice(0,65)
      }))
   }));
+  // Guard against reintroducing the desktop CTA alongside the mobile menu.
+  if(route.width<=1000 && await page.locator('.header-cta').isVisible()){
+    throw Error('Desktop header CTA is incorrectly visible in mobile layout');
+  }
+  // Eagerly resolve below-the-fold images for reproducible full-page screenshots.
+  await page.locator('main img').evaluateAll(images=>images.forEach(img=>{img.loading='eager';}));
+  await page.waitForTimeout(1200);
   const overflow=metrics.docWidth>metrics.viewport+1;
   if(overflow){issues++;console.warn('OVERFLOW ELEMENTS',metrics.overflowElements);}
   const fname=`screenshots/${route.label}-${route.width}.png`;
